@@ -4,8 +4,19 @@ from django.views.generic import ListView
 from django.http import JsonResponse
 from questions.models import Question, Answer
 from results.models import Result
-from django.contrib.auth.models import User
+from django.shortcuts import render
 
+def handle_400(request, exception):
+    return render(request, '400.html', status=400)
+
+def handle_403(request, exception):
+    return render(request, '403.html', status=403)
+
+def handle_404(request, exception):
+    return render(request, '404.html', status=404)
+
+def handle_500(request):
+    return render(request, '500.html', status=500)
 
 class QuizListView(ListView):
     model = Quiz
